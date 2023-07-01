@@ -1,7 +1,13 @@
-from tweetCollector import Tweets
+from tweetCollector import TwitterBot
 from selenium import webdriver
 
-username = input("Which user's tweets do you want to collect? : ")
-browser = webdriver.Firefox()
-bot = Tweets(username, browser)
-bot.collector()
+username = "likeaseyfo"
+password = "11585816252twitter"
+
+bot = TwitterBot(username, password)
+bot.login()
+bot.collector("search_username")
+bot.close_browser()
+
+# Access collected tweets
+print(bot.tweets)
