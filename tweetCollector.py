@@ -48,18 +48,15 @@ class TwitterBot:
 
         while True:
             tweet_elements = self.browser.find_elements(By.CSS_SELECTOR, 'section.css-1dbjc4n:nth-child(3)')
-            time.sleep(5)
             for tweet_element in tweet_elements:
-                tweet_text_element = tweet_element.find_element(By.CSS_SELECTOR, '#id__0j5akj58zgno > span:nth-child(1)')
-                tweet_text = tweet_text_element.text
-                self.tweets.append(tweet_text)
-
+                self.tweets.append(tweet_element.text)
             time.sleep(5)
+
             scrollable_div = self.browser.find_element(By.CSS_SELECTOR, '.r-urgr8i')
             self.browser.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", scrollable_div)
             time.sleep(3)
 
-            new_tweet_elements = self.browser.find_elements(By.CSS_SELECTOR, 'div[data-testid="tweet"]')
+            new_tweet_elements = self.browser.find_elements(By.CSS_SELECTOR, 'section.css-1dbjc4n:nth-child(3)')
             if len(new_tweet_elements) == len(tweet_elements):
                 break
 
